@@ -21,17 +21,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.currencycheck.presentation.R
 import com.currencycheck.presentation.ui.filter.FilterState
 import com.currencycheck.presentation.ui.filter.FilterViewModel
 import com.currencycheck.presentation.ui.main.MainCurrencyViewModel.Companion.TO_FILTER_KEY
 import com.currencycheck.presentation.ui.theme.*
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun FilterScreen(
-    navController: NavController, filterViewModel: FilterViewModel = koinViewModel()
+    navController: NavController, filterViewModel: FilterViewModel = hiltViewModel()
 ) {
     val filterScreenState by filterViewModel.state.collectAsState()
 

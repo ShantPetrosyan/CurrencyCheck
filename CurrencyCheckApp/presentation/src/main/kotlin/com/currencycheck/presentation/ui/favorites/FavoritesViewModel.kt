@@ -7,11 +7,14 @@ import com.currencycheck.domain.util.Resource
 import com.currencycheck.presentation.base.BaseViewModel
 import com.currencycheck.presentation.base.Reducer
 import com.currencycheck.presentation.ui.main.MainScreenViewDataMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FavoritesViewModel(
+@HiltViewModel
+class FavoritesViewModel @Inject constructor(
     private val favoritesUseCase: IFavoritesUseCase,
     private val currenciesUseCase: ICurrentCurrenciesUseCase
 ) : BaseViewModel<FavoritesState, FavoritesUIEvent>() {
@@ -39,13 +42,13 @@ class FavoritesViewModel(
 
                 currencyPairs.map { currencyPairsItem ->
                     val job = async {
-                        when (val result =
+                        when (val resultInfo =
                             currenciesUseCase.getCurrentCurrencies(
                                 currencyPairsItem.value, currencyPairsItem.key
                             )) {
                             is Resource.Success -> {
                                 val data = MainScreenViewDataMapper.toModel(
-                                    result.data
+                                    resultInfo.data
                                 )
                                 favoriteList.forEachIndexed { index, item ->
                                     if (item.currencyFrom == data?.baseCurrency) {
@@ -63,8 +66,15 @@ class FavoritesViewModel(
                     job.await()
                 }
 
-                sendEvent(FavoritesUIEvent.ShowData(FavoritesScreenViewDataMapper.toModel(result)))
+                sendEvent(FavoritesUIEvent.ShowData(FavoritesScreenViewDataMapper.toModel(favoriteList)))
             }
+        }
+    }
+
+    fun updateFavoriteStatus(isActive: Boolean, currencyFrom: String, currencyTo: String) {
+        viewModelScope.launch {
+            favoritesUseCase.updateFavoriteStatus(isActive, currencyFrom, currencyTo)
+            loadFavoritesInfo()
         }
     }
 

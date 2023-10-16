@@ -8,7 +8,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,18 +22,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.currencycheck.presentation.R
 import com.currencycheck.presentation.ui.favorites.FavoritesViewModel
 import com.currencycheck.presentation.ui.main.compose.showLoadingView
 import com.currencycheck.presentation.ui.theme.CardColor
 import com.currencycheck.presentation.ui.theme.TextDefaultColor
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun showFavoritesView(
     paddings: PaddingValues,
-    favoritesViewModel: FavoritesViewModel = koinViewModel(),
-    onFavoriteClicked: (isActive: Boolean, currencyFrom: String, currencyTo: String) -> Unit
+    favoritesViewModel: FavoritesViewModel = hiltViewModel()
 ) {
     val favoritesScreenState by favoritesViewModel.state.collectAsState()
 
@@ -67,7 +68,7 @@ fun showFavoritesView(
                     true,
                     favoritesScreenState.isLoading,
                     onFavoriteClicked = {
-                        onFavoriteClicked(it, favoriteData.currencyFrom, favoriteData.currencyTo)
+                        favoritesViewModel.updateFavoriteStatus(it, favoriteData.currencyFrom, favoriteData.currencyTo)
                     }
                 )
             }

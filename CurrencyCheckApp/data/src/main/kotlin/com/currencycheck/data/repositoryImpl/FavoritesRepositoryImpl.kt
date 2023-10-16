@@ -2,14 +2,15 @@ package com.currencycheck.data.repositoryImpl
 
 import com.currencycheck.data.local.entity.FavoriteEntity
 import com.currencycheck.data.mappers.toFavoritesList
-import com.currencycheck.data.source.LocalDataSource
+import com.currencycheck.data.source.ILocalDataSource
+import com.currencycheck.data.source.LocalDataSourceImpl
 import com.currencycheck.domain.entity.FavoriteCurrencyInfo
 import com.currencycheck.domain.repositories.FavoritesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class FavoritesRepositoryImpl(
-    private val localDataSource: LocalDataSource
+    private val localDataSource: ILocalDataSource
 ) : FavoritesRepository {
     override fun getFavoriteCurrencies(): Flow<List<FavoriteCurrencyInfo>>? {
         return localDataSource.getAllFavorites()?.map { it.toFavoritesList() }

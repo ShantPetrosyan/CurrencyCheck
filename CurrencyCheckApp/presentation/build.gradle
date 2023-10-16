@@ -2,6 +2,8 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -69,10 +71,15 @@ dependencies {
     implementation "androidx.compose.material3:material3:$material_3"
     implementation "androidx.compose.material3:material3-window-size-class:$material_3"
     implementation "com.google.accompanist:accompanist-swiperefresh:$swiperefresh_version"
-    // Injection Koin
-    implementation "io.insert-koin:koin-android:$koin_version"
-    implementation "io.insert-koin:koin-androidx-compose:$koin_compose_version"
-    implementation "io.insert-koin:koin-androidx-compose-navigation:$koin_compose_version"
+
+    // Dependency Injection
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation "androidx.hilt:hilt-work:$hilt_navigation_compose"
+    kapt "androidx.hilt:hilt-compiler:$hilt_navigation_compose"
+    implementation "androidx.work:work-runtime-ktx:$work_runtime_ktx"
+    implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_compose"
+
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"

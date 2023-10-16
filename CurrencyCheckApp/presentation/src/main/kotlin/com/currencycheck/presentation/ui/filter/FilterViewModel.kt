@@ -4,10 +4,13 @@ import androidx.lifecycle.viewModelScope
 import com.currencycheck.domain.usecases.IFilterUseCase
 import com.currencycheck.presentation.base.BaseViewModel
 import com.currencycheck.presentation.base.Reducer
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FilterViewModel(
+@HiltViewModel
+class FilterViewModel @Inject constructor(
     private val filterUseCase: IFilterUseCase,
     private val filterMapper: FilterScreenViewDataMapper
 ) : BaseViewModel<FilterState, FilterUIEvent>() {

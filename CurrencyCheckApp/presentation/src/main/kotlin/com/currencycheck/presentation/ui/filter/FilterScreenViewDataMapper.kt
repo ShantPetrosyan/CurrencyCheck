@@ -3,8 +3,9 @@ package com.currencycheck.presentation.ui.filter
 import android.content.Context
 import com.currencycheck.presentation.R
 import com.currencycheck.presentation.ui.filter.data.FilterViewModelData
+import javax.inject.Inject
 
-class FilterScreenViewDataMapper(var context: Context) {
+class FilterScreenViewDataMapper @Inject constructor(var context: Context) {
     fun toModel(selectedFilterPosition: Int): List<FilterViewModelData> {
         return getFilterList(selectedFilterPosition, context)
     }

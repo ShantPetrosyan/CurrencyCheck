@@ -9,10 +9,13 @@ import com.currencycheck.presentation.base.BaseViewModel
 import com.currencycheck.presentation.base.Reducer
 import com.currencycheck.presentation.ui.helper.CurrencyHelper.getInitialCurrencies
 import com.currencycheck.presentation.ui.main.MainScreenViewDataMapper.toModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainCurrencyViewModel(
+@HiltViewModel
+class MainCurrencyViewModel @Inject constructor(
     private val currenciesUseCase: ICurrentCurrenciesUseCase,
     private val favoritesUseCase: IFavoritesUseCase,
     private val filterUseCase: IFilterUseCase

@@ -10,7 +10,7 @@ import com.currencycheck.data.local.entity.FavoriteEntity
 @Database(
     version = 1,
     entities = [FavoriteEntity::class],
-    exportSchema = true
+    exportSchema = false
 )
 abstract class CurrencyDataBase : RoomDatabase() {
 

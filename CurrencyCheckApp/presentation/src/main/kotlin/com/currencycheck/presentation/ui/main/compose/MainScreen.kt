@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import com.currencycheck.presentation.R
@@ -47,12 +48,11 @@ import com.currencycheck.presentation.ui.main.data.MainViewModelData
 import com.currencycheck.presentation.ui.theme.*
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MainScreen(
     navController: NavController, savedEntries: SavedStateHandle,
-    currencyScreenViewModel: MainCurrencyViewModel = koinViewModel()
+    currencyScreenViewModel: MainCurrencyViewModel = hiltViewModel()
 ) {
     val refreshState = remember { mutableStateOf(false) }
 
@@ -228,11 +228,7 @@ fun body(
                                 onFavoriteClicked(isActive, from, to)
                             })
                     } else {
-                        showFavoritesView(
-                            paddings,
-                            onFavoriteClicked = { isActive, from, to ->
-                                onFavoriteClicked(isActive, from, to)
-                            })
+                        showFavoritesView(paddings)
                     }
                 }
             }

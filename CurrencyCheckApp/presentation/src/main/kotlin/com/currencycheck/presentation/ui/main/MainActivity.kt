@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.ui.unit.Dp
 import com.currencycheck.presentation.navigation.NavGraph
 import com.currencycheck.presentation.ui.theme.CurrencyCheckTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

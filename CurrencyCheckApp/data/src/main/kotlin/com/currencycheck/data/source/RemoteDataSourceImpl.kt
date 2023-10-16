@@ -2,19 +2,19 @@ package com.currencycheck.data.source
 
 import com.currencycheck.data.remote.CurrencyApi
 import com.currencycheck.data.remote.dto.CurrencyResponseDto
-import com.currencycheck.domain.entity.CurrencyValues
 import com.currencycheck.domain.helpers.API_KEY
 import com.currencycheck.domain.util.Resource
 import retrofit2.HttpException
+import javax.inject.Inject
 
-interface DataSource {
+interface IRemoteDataSource {
     suspend fun getCurrentCurrencies(
         currencies: String,
         mainCurrency: String
     ): Resource<CurrencyResponseDto>
 }
 
-class RemoteDataSource(private val api: CurrencyApi) : DataSource {
+class RemoteDataSourceImpl @Inject constructor(private val api: CurrencyApi) : IRemoteDataSource {
     override suspend fun getCurrentCurrencies(
         currencies: String,
         mainCurrency: String
