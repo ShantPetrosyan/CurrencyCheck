@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.currencycheck.app'
-    compileSdk 33
+    compileSdk compile_sdk
 
     defaultConfig {
         applicationId "com.currencycheck.app"
-        minSdk 23
-        targetSdk 33
+        minSdk min_sdk
+        targetSdk target_sdk
         versionCode 1
         versionName "1.0"
 
@@ -24,20 +24,52 @@ android {
         }
     }
     compileOptions {
+        //coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        compose true
+        viewBinding true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
 }
 
 dependencies {
+    implementation project(path: ':presentation')
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.10.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // compose
+    implementation "androidx.compose.runtime:runtime:$compose_version"
+
+    // Android libs
+    implementation "androidx.core:core-ktx:${core_ktx_version}"
+    implementation "androidx.appcompat:appcompat:${app_compat_version}"
+    implementation "com.google.android.material:material:${material_version}"
+    implementation "androidx.navigation:navigation-fragment-ktx:${navigation_fragment_ktx_version}"
+    implementation "androidx.navigation:navigation-ui-ktx:${navigation_ui_ktx_version}"
+
+    // Injection Koin
+    implementation "io.insert-koin:koin-android:$koin_version"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    implementation "com.squareup.retrofit2:converter-moshi:${retrofit_version}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttp_logger_version}"
+
+    // Test libs
+    testImplementation "junit:junit:${junit_version}"
+    androidTestImplementation "androidx.test.ext:junit:${ext_junit_version}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${espresso_core_version}"
 }

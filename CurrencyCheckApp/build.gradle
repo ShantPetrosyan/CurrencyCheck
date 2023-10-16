@@ -1,6 +1,75 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        compile_sdk                                         = 33
+        min_sdk                                             = 30
+        target_sdk                                          = 33
+
+        compiler_extension_version                          = "1.4.4"
+        mockk_version                                       = "1.10.0"
+        mockito_version                                     = "5.2.0"
+        android_lib_version                                 = "7.4.2"
+        gradle_version                                      = "7.1.2"
+        safe_args_gradle_version                            = "2.5.3"
+        kotlin_version                                      = "1.8.0"
+        coroutines_core_version                             = "1.6.4"
+        core_ktx_version                                    = "1.9.0"
+        app_compat_version                                  = "1.6.1"
+        material_version                                    = "1.8.0"
+        constraint_version                                  = "2.1.4"
+        navigation_fragment_ktx_version                     = "2.5.3"
+        navigation_ui_ktx_version                           = "2.5.3"
+        junit_version                                       = "4.13.2"
+        ext_junit_version                                   = "1.1.5"
+        espresso_core_version                               = "3.5.1"
+        room_version                                        = "2.5.1"
+        lifecycle_ktx_version                               = "2.6.1"
+        sqlite_jdbc_version                                 = "3.41.2.1"
+        work_manager_version                                = "2.8.1"
+        gson_version                                        = "2.10.1"
+        lifecycle_viewmodel_compose                         = "2.6.1"
+        compose_version                                     = "1.4.0"
+        compose_material                                    = "1.4.0"
+        kompakt_ui_version                                  = "0.0.12"
+        retrofit_version                                    = "2.9.0"
+        okhttp_logger_version                               = "5.0.0-alpha.3"
+        koin_version                                        = "3.4.0"
+        nav_version                                         = "2.5.3"
+        koin_compose_version                                = "3.4.3"
+        lifecycle_runtime                                   = "2.6.2"
+        compose_runtime                                     = "1.5.3"
+        material_3                                          = "1.1.2"
+        swiperefresh_version                                          = "0.31.5-beta"
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$safe_args_gradle_version"
+    }
+
+    allprojects{
+        configurations.all {
+            resolutionStrategy {
+                force "org.xerial:sqlite-jdbc:$sqlite_jdbc_version"
+            }
+        }
+    }
+}
+
 plugins {
-    id 'com.android.application' version '7.4.2' apply false
-    id 'com.android.library' version '7.4.2' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+    id 'com.android.application' version "$android_lib_version" apply false
+    id 'com.android.library' version "$android_lib_version" apply false
+    id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
+    id 'org.jetbrains.kotlin.jvm' version "$kotlin_version" apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

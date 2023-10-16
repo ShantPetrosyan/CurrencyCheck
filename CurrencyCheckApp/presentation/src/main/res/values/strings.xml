@@ -1,0 +1,24 @@
+<resources>
+    <string name="title_activity_main">Rates</string>
+    <string name="currencies">Currencies</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="favorites">Favorites</string>
+    <string name="currency_list_shower">Showing available currency list</string>
+    <string name="no_favorites">No selected favorites</string>
+    <string name="start_to_end">Code A-Z</string>
+    <string name="end_to_start">Code Z-A</string>
+    <string name="ascending">Quote Asc.</string>
+    <string name="descending">Quote Desc.</string>
+    <string name="filters">Filters</string>
+    <string name="back">Back</string>
+    <string name="apply">Apply</string>
+    <string name="sort_by">SORT BY</string>
+    <string name="filter_selector">Filter selector</string>
+    <string name="bad_request">The request was unacceptable, often due to missing a required parameter.</string>
+    <string name="unauthorized">No valid API key provided.</string>
+    <string name="not_found">The requested resource doesn\'t exist.</string>
+    <string name="too_many_requests">API request limit exceeded. See section Rate Limiting for more info.</string>
+    <string name="unknownError">Unknown error</string>
+    <string name="back_connection">Back Online!</string>
+    <string name="no_internet_connection">No Internet Connection!</string>
+</resources>

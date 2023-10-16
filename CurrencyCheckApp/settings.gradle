@@ -14,3 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Currency Check"
 include ':app'
+include ':data'
+include ':presentation'
+include ':domain'
